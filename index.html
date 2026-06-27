@@ -1,2 +1,209 @@
-<loxyTYPE heal>
-Hello.Github
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thitima Portfolio</title>
+  <link rel="stylesheet" href="style/style.css" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <p style="font-size: 0.95rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.85;">Portfolio</p>
+      <h1 style="font-size: 3rem; margin-top: 0.75rem;">สวัสดีค่ะ ฉันชื่อ ธิติมา</h1>
+      <p style="max-width: 720px; margin: 1rem auto 0; font-size: 1.15rem; opacity: 0.92;">
+        นักพัฒนาเว็บ ที่มีความสนใจในการสร้างเว็บไซต์ที่สวยงาม ใช้งานง่าย และตอบโจทย์ผู้ใช้ได้จริง ฉันมุ่งเน้นการออกแบบประสบการณ์ผู้ใช้และพัฒนาโค้ดที่มีคุณภาพสูง
+      </p>
+      <a href="#contact" class="button-primary">ติดต่อฉัน</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="about">
+      <h2>เกี่ยวกับฉัน</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>ประวัติสั้น ๆ</h3>
+          <p>ฉันชื่นชอบการพัฒนาเว็บไซต์ด้วย HTML, CSS และ JavaScript และสนใจเรียนรู้เทคโนโลยีใหม่ ๆ เช่น React, Node.js และ SEO เพื่อให้เว็บไซต์มีทั้งความสวยงามและประสิทธิภาพ</p>
+        </div>
+        <div class="card">
+          <h3>ความสนใจ</h3>
+          <ul>
+            <li>ออกแบบหน้าเว็บที่เน้น UX/UI</li>
+            <li>พัฒนาเว็บแอปพลิเคชันแบบตอบสนอง</li>
+            <li>เขียนโค้ดที่อ่านง่ายและปรับปรุงได้</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>ทักษะ</h2>
+      <div class="card skills">
+        <span class="skill-pill">HTML</span>
+        <span class="skill-pill">CSS</span>
+        <span class="skill-pill">JavaScript</span>
+        <span class="skill-pill">React</span>
+        <span class="skill-pill">Git</span>
+        <span class="skill-pill">Responsive Design</span>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>โครงการตัวอย่าง</h2>
+      <div class="card-grid">
+        <div class="card project">
+          <h3>เว็บไซต์ส่วนตัว</h3>
+          <p>สร้างเว็บไซต์นำเสนอโปรไฟล์ส่วนตัว โดยใช้ HTML, CSS และ JavaScript เพื่อให้โหลดเร็วและใช้งานได้บนมือถือ</p>
+        </div>
+        <div class="card project">
+          <h3>ระบบจัดการงาน</h3>
+          <p>พัฒนาเว็บระบบจัดการงานด้วยฟอร์มอินเทอร์แอคทีฟ และปรับปรุง UI ให้ใช้งานสะดวกสำหรับผู้ใช้ทุกวัย</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="attendance">
+      <h2>เช็คชื่อด้วยโลเคชัน</h2>
+      <div class="card attendance-card">
+        <p>กดปุ่มด้านล่างเพื่อตรวจสอบตำแหน่งของคุณและเช็คชื่อภายในพื้นที่ที่กำหนด</p>
+        <button id="checkInButton" class="button-primary">เช็คชื่อด้วยโลเคชัน</button>
+        <p id="checkInStatus" class="status">สถานะ: ยังไม่ได้เช็คชื่อ</p>
+        <div class="attendance-info">
+          <p id="coords">พิกัด: -</p>
+          <p id="distance">ระยะห่างจากพื้นที่: -</p>
+        </div>
+        <div class="attendance-records">
+          <h3>บันทึกการเช็คชื่อ</h3>
+          <ul id="attendanceList"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>ติดต่อ</h2>
+      <div class="card">
+        <p>หากต้องการร่วมงานหรือสอบถามข้อมูลเพิ่มเติม สามารถติดต่อผ่านอีเมลหรือโซเชียลมีเดียได้เลย</p>
+        <ul>
+          <li>Email: example@email.com</li>
+          <li>Line: @example</li>
+          <li>GitHub: github.com/thitima</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Thitima. สร้างโดย Thitima</p>
+  </footer>
+
+  <script>
+    const targetLocation = { lat: 13.736717, lon: 100.523186 };
+    const allowedRadiusMeters = 120;
+    const storageKey = 'thitima-checkin-records';
+
+    function formatDate(date) {
+      return new Intl.DateTimeFormat('th-TH', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      }).format(date);
+    }
+
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+      const toRad = (deg) => deg * (Math.PI / 180);
+      const R = 6371000;
+      const dLat = toRad(lat2 - lat1);
+      const dLon = toRad(lon2 - lon1);
+      const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return R * c;
+    }
+
+    function loadRecords() {
+      try {
+        const stored = localStorage.getItem(storageKey);
+        return stored ? JSON.parse(stored) : [];
+      } catch (error) {
+        console.error('Load records failed', error);
+        return [];
+      }
+    }
+
+    function saveRecord(record) {
+      const records = loadRecords();
+      records.unshift(record);
+      localStorage.setItem(storageKey, JSON.stringify(records.slice(0, 20)));
+      renderRecords();
+    }
+
+    function renderRecords() {
+      const attendanceList = document.getElementById('attendanceList');
+      const records = loadRecords();
+      attendanceList.innerHTML = '';
+
+      if (records.length === 0) {
+        attendanceList.innerHTML = '<li>ยังไม่มีบันทึกการเช็คชื่อ</li>';
+        return;
+      }
+
+      records.forEach((record) => {
+        const item = document.createElement('li');
+        item.textContent = `${formatDate(new Date(record.timestamp))} - พิกัด ${record.lat.toFixed(6)}, ${record.lon.toFixed(6)} - ระยะ ${record.distance.toFixed(0)} เมตร`;
+        attendanceList.appendChild(item);
+      });
+    }
+
+    function setStatus(message, success = false) {
+      const status = document.getElementById('checkInStatus');
+      status.textContent = `สถานะ: ${message}`;
+      status.style.color = success ? '#1f7a4c' : '#b91c1c';
+    }
+
+    function updateLocationInfo(lat, lon, distance) {
+      document.getElementById('coords').textContent = `พิกัด: ${lat.toFixed(6)}, ${lon.toFixed(6)}`;
+      document.getElementById('distance').textContent = `ระยะห่างจากพื้นที่: ${distance.toFixed(0)} เมตร`;
+    }
+
+    function requestLocation() {
+      if (!navigator.geolocation) {
+        setStatus('อุปกรณ์ของคุณไม่รองรับการขอพิกัด');
+        return;
+      }
+
+      setStatus('กำลังตรวจสอบตำแหน่ง...');
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          const distance = calculateDistance(latitude, longitude, targetLocation.lat, targetLocation.lon);
+          updateLocationInfo(latitude, longitude, distance);
+
+          if (distance <= allowedRadiusMeters) {
+            setStatus('เช็คชื่อสำเร็จ', true);
+            saveRecord({ timestamp: Date.now(), lat: latitude, lon: longitude, distance });
+          } else {
+            setStatus('อยู่นอกพื้นที่ที่กำหนด');
+          }
+        },
+        (error) => {
+          const messages = {
+            1: 'ปฏิเสธการใช้งานตำแหน่ง',
+            2: 'ไม่สามารถหาตำแหน่งได้',
+            3: 'หมดเวลาการขอพิกัด'
+          };
+          setStatus(messages[error.code] || 'เกิดข้อผิดพลาดในการขอพิกัด');
+        },
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+      );
+    }
+
+    document.getElementById('checkInButton').addEventListener('click', requestLocation);
+    window.addEventListener('load', renderRecords);
+  </script>
+</body>
+</html>
