@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Thitima Portfolio</title>
   <link rel="stylesheet" href="style/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha512-sA+e2E8qD5iY4w0cG+anvVVn1VZMSnLFMs7ia1m2Cu/OOt1e4B5HtB4gdazcJTu6q827II2HyljQ0X0j5e6wQw==" crossorigin="" />
 </head>
 <body>
   <header>
@@ -73,6 +74,7 @@
           <p id="coords">พิกัด: -</p>
           <p id="distance">ระยะห่างจากพื้นที่: -</p>
         </div>
+        <div id="attendanceMap" class="attendance-map"></div>
         <div class="attendance-records">
           <h3>บันทึกการเช็คชื่อ</h3>
           <ul id="attendanceList"></ul>
@@ -98,8 +100,8 @@
   </footer>
 
   <script>
-    const targetLocation = { lat: 13.736717, lon: 100.523186 };
-    const allowedRadiusMeters = 120;
+    const targetLocation = { lat: 14.796395, lon: 100.651794 };
+    const allowedRadiusMeters = 1000;
     const storageKey = 'thitima-checkin-records';
 
     function formatDate(date) {
@@ -182,6 +184,7 @@
           const { latitude, longitude } = position.coords;
           const distance = calculateDistance(latitude, longitude, targetLocation.lat, targetLocation.lon);
           updateLocationInfo(latitude, longitude, distance);
+          updateUserMarker(latitude, longitude);
 
           if (distance <= allowedRadiusMeters) {
             setStatus('เช็คชื่อสำเร็จ', true);
@@ -202,8 +205,49 @@
       );
     }
 
+    let map;
+    let userMarker;
+    const targetLatLng = [14.796395, 100.651794];
+
+    function initMap() {
+      map = L.map('attendanceMap').setView(targetLatLng, 15);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+
+      L.marker(targetLatLng)
+        .addTo(map)
+        .bindPopup('มหาวิทยาลัยราชภัฏเทพสตรี')
+        .openPopup();
+
+      L.circle(targetLatLng, {
+        color: '#2563eb',
+        fillColor: '#2563eb',
+        fillOpacity: 0.1,
+        radius: allowedRadiusMeters
+      }).addTo(map);
+    }
+
+    function updateUserMarker(lat, lon) {
+      const latLng = [lat, lon];
+      if (userMarker) {
+        userMarker.setLatLng(latLng);
+      } else {
+        userMarker = L.marker(latLng, { opacity: 0.9 }).addTo(map).bindPopup('ตำแหน่งของคุณ');
+      }
+      userMarker.openPopup();
+      const bounds = L.latLngBounds([targetLatLng, latLng]);
+      map.fitBounds(bounds, { padding: [50, 50] });
+    }
+
     document.getElementById('checkInButton').addEventListener('click', requestLocation);
-    window.addEventListener('load', renderRecords);
+    window.addEventListener('load', () => {
+      renderRecords();
+      initMap();
+    });
   </script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha512-QV+0Oz2nZbQP2qfLKpP6TzKITi0h5s+tcz8PCN7WkrrqwJGxhoDK11LReP8h6U7Ctn2Ho6B2VnVzYL0Zxi2C5Q==" crossorigin=""></script>
 </body>
 </html>
